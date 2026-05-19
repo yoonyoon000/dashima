@@ -1,4 +1,4 @@
-import { copyFileSync, cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -13,5 +13,4 @@ cpSync(join(dist, "assets"), pagesAssets, { recursive: true });
 
 const html = readFileSync(distHtml, "utf8").replaceAll("./assets/", "assets/");
 writeFileSync(join(root, "index.html"), html);
-
-copyFileSync(join(root, "app.html"), join(dist, "app.html"));
+writeFileSync(join(dist, "index.html"), html);
