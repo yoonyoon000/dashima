@@ -174,7 +174,15 @@ export default function App() {
   const resultCopy = useMemo(() => (resultCount ? getResultCopy(resultCount) : ""), [resultCount]);
 
   async function openPacket() {
-    if (isOpening || isOpened) return;
+    if (isOpening) return;
+
+    if (isOpened) {
+      setIsOpened(false);
+      setResultCount(null);
+      setKelpItems([]);
+      setParticles([]);
+      packetControls.set({ x: 0, rotate: 0, scale: 1 });
+    }
 
     const count = drawKelpCount();
     setResultCount(count);
@@ -230,12 +238,12 @@ export default function App() {
 
           <motion.button
             type="button"
-            aria-label="너구리 라면 봉지를 눌러 다시마 개수를 확인하기"
-            disabled={isOpening || isOpened}
+            aria-label={isOpened ? "너구리 라면 봉지를 다시 눌러 새로 뽑기" : "너구리 라면 봉지를 눌러 다시마 개수를 확인하기"}
+            disabled={isOpening}
             onClick={openPacket}
             animate={packetControls}
-            whileHover={!isOpening && !isOpened ? { scale: 1.045, rotate: [-0.6, 0.6, -0.3, 0.3, 0] } : undefined}
-            whileTap={!isOpening && !isOpened ? { scale: 0.97 } : undefined}
+            whileHover={!isOpening ? { scale: 1.045, rotate: [-0.6, 0.6, -0.3, 0.3, 0] } : undefined}
+            whileTap={!isOpening ? { scale: 0.97 } : undefined}
             className="group relative z-20 w-[min(74vw,340px)] touch-manipulation border-0 bg-transparent p-0 outline-none disabled:cursor-default sm:w-[360px]"
           >
             <span className="absolute -inset-7 -z-10 rounded-full bg-yellow-400/10 blur-3xl transition-opacity group-hover:opacity-100" />
