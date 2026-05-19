@@ -3,7 +3,7 @@ import React from "react";
 import { useMemo, useState } from "react";
 import neoguriOriginalPacket from "./assets/neoguri-original.jpeg";
 import neoguriTornPacket from "./assets/neoguri-front.jpg";
-import neoguriTopStrip from "./assets/neoguri-top-strip.png";
+import neoguriTopStrip from "./assets/neoguri-top-strip-large.png";
 
 const OPENING_MS = 1480;
 
@@ -87,7 +87,7 @@ function TornStripPiece({ side }) {
 
   return (
     <motion.div
-      className={`absolute -top-1 h-14 w-[62%] overflow-hidden bg-white/95 shadow-[0_10px_18px_rgba(0,0,0,0.22)] ${
+      className={`absolute -top-1 h-12 w-[62%] overflow-hidden drop-shadow-[0_10px_14px_rgba(0,0,0,0.28)] ${
         isLeft ? "left-0 origin-right" : "right-0 origin-left"
       }`}
       style={{
@@ -109,7 +109,7 @@ function TornStripPiece({ side }) {
         src={neoguriTopStrip}
         alt=""
         aria-hidden="true"
-        className={`absolute top-[-8px] h-auto w-[184%] select-none contrast-125 saturate-125 ${
+        className={`absolute top-0 h-full w-[184%] select-none object-fill contrast-125 saturate-125 ${
           isLeft ? "left-0" : "right-0"
         }`}
         draggable="false"
