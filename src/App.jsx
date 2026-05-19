@@ -7,8 +7,8 @@ const OPENING_MS = 1480;
 
 function drawKelpCount() {
   const r = Math.random();
-  if (r < 0.82) return 1;
-  if (r < 0.97) return 2;
+  if (r < 0.969) return 1;
+  if (r < 0.999) return 2;
   return 3;
 }
 
