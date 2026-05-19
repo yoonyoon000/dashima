@@ -3,7 +3,7 @@ import React from "react";
 import { useMemo, useState } from "react";
 import neoguriOriginalPacket from "./assets/neoguri-original.jpeg";
 import neoguriTornPacket from "./assets/neoguri-front.jpg";
-import neoguriTopStrip from "./assets/neoguri-top-strip-crop.png";
+import neoguriTopStrip from "./assets/neoguri-top-strip.png";
 
 const OPENING_MS = 1480;
 
@@ -87,17 +87,19 @@ function TornStripPiece({ side }) {
 
   return (
     <motion.div
-      className={`absolute top-1 h-7 w-[52%] overflow-hidden ${isLeft ? "left-0 origin-right" : "right-0 origin-left"}`}
+      className={`absolute -top-1 h-14 w-[62%] overflow-hidden bg-white/95 shadow-[0_10px_18px_rgba(0,0,0,0.22)] ${
+        isLeft ? "left-0 origin-right" : "right-0 origin-left"
+      }`}
       style={{
         clipPath: isLeft
-          ? "polygon(0 10%, 100% 0, 92% 100%, 0 82%)"
-          : "polygon(0 0, 100% 10%, 100% 82%, 8% 100%)",
+          ? "polygon(0 7%, 100% 0, 88% 100%, 0 78%)"
+          : "polygon(0 0, 100% 7%, 100% 78%, 12% 100%)",
       }}
       initial={{ x: 0, y: 0, rotate: 0, opacity: 0.98 }}
       animate={{
-        x: isLeft ? -30 : 30,
-        y: -18,
-        rotate: isLeft ? -13 : 13,
+        x: isLeft ? -44 : 44,
+        y: -24,
+        rotate: isLeft ? -12 : 12,
         opacity: 1,
       }}
       exit={{ opacity: 0 }}
@@ -107,7 +109,9 @@ function TornStripPiece({ side }) {
         src={neoguriTopStrip}
         alt=""
         aria-hidden="true"
-        className={`absolute top-0 h-full w-[192%] select-none object-fill contrast-125 saturate-125 ${isLeft ? "left-0" : "right-0"}`}
+        className={`absolute top-[-8px] h-auto w-[184%] select-none contrast-125 saturate-125 ${
+          isLeft ? "left-0" : "right-0"
+        }`}
         draggable="false"
       />
     </motion.div>
