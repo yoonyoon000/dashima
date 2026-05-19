@@ -24,7 +24,6 @@ function makeKelpItems(count) {
       rotate: (Math.random() * 64 - 32) + (index - 1) * 10,
       delay: 0.46 + index * (count === 3 ? 0.09 : 0.16),
       scale: 0.86 + Math.random() * 0.28 + count * 0.06,
-      bend: Math.random() > 0.5 ? "rounded-[46%_54%_60%_40%]" : "rounded-[58%_42%_45%_55%]",
     };
   });
 }
@@ -55,11 +54,7 @@ function getResultCopy(count) {
 function KelpPiece({ item, intensity }) {
   return (
     <motion.div
-      className={`absolute left-1/2 top-[31%] h-24 w-16 origin-bottom ${item.bend} border border-lime-200/20 bg-gradient-to-br from-emerald-700 via-green-950 to-lime-900 shadow-[inset_-12px_-16px_18px_rgba(0,0,0,0.24),0_12px_20px_rgba(0,0,0,0.32)]`}
-      style={{
-        clipPath:
-          "polygon(13% 6%, 52% 0%, 91% 16%, 100% 52%, 83% 94%, 43% 100%, 7% 83%, 0% 34%)",
-      }}
+      className="absolute left-1/2 top-[31%] h-24 w-16 origin-bottom overflow-hidden rounded-sm border border-lime-200/25 bg-gradient-to-br from-emerald-700 via-green-950 to-lime-900 shadow-[inset_-12px_-16px_18px_rgba(0,0,0,0.24),0_12px_20px_rgba(0,0,0,0.32)]"
       initial={{ x: "-50%", y: 8, rotate: 0, scale: 0.25, opacity: 0 }}
       animate={{
         x: `calc(-50% + ${item.x}px)`,
@@ -76,8 +71,11 @@ function KelpPiece({ item, intensity }) {
         mass: 0.8,
       }}
     >
-      <div className="absolute left-4 top-2 h-[86%] w-2 rounded-full bg-lime-300/15 blur-[1px]" />
-      <div className="absolute right-4 top-6 h-12 w-2 rotate-12 rounded-full bg-black/15" />
+      <div className="absolute inset-1 border border-lime-300/10" />
+      <div className="absolute left-3 top-0 h-full w-2 bg-lime-300/10 blur-[1px]" />
+      <div className="absolute right-4 top-0 h-full w-1 bg-black/15" />
+      <div className="absolute left-0 top-5 h-1 w-full bg-lime-200/10" />
+      <div className="absolute left-0 top-14 h-1 w-full bg-black/10" />
     </motion.div>
   );
 }
