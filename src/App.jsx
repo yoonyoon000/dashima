@@ -2,7 +2,7 @@ import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import React from "react";
 import { useMemo, useState } from "react";
 import neoguriPacket from "./assets/neoguri-front.jpg";
-import neoguriTopStrip from "./assets/neoguri-top-strip.jpg";
+import neoguriTopStrip from "./assets/neoguri-top-strip.png";
 
 const OPENING_MS = 1480;
 
@@ -106,7 +106,7 @@ function TornStripPiece({ side }) {
         src={neoguriTopStrip}
         alt=""
         aria-hidden="true"
-        className={`absolute top-0 h-full w-[186%] select-none object-cover mix-blend-multiply contrast-125 saturate-125 ${isLeft ? "left-0" : "right-0"}`}
+        className={`absolute top-[-20px] h-auto w-[186%] select-none contrast-125 saturate-125 ${isLeft ? "left-0" : "right-0"}`}
         draggable="false"
       />
     </motion.div>
