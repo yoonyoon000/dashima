@@ -1,7 +1,8 @@
 import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import React from "react";
 import { useMemo, useState } from "react";
-import neoguriPacket from "./assets/neoguri.jpeg";
+import neoguriPacket from "./assets/neoguri-front.jpg";
+import neoguriTopStrip from "./assets/neoguri-top-strip.jpg";
 
 const OPENING_MS = 1480;
 
@@ -80,29 +81,47 @@ function KelpPiece({ item, intensity }) {
   );
 }
 
+function TornStripPiece({ side }) {
+  const isLeft = side === "left";
+
+  return (
+    <motion.div
+      className={`absolute top-2 h-6 w-[54%] overflow-hidden ${isLeft ? "left-0 origin-right" : "right-0 origin-left"}`}
+      style={{
+        clipPath: isLeft
+          ? "polygon(0 12%, 100% 0, 88% 100%, 0 74%)"
+          : "polygon(0 0, 100% 12%, 100% 74%, 10% 100%)",
+      }}
+      initial={{ x: 0, y: 0, rotate: 0, opacity: 0.98 }}
+      animate={{
+        x: isLeft ? -36 : 36,
+        y: -22,
+        rotate: isLeft ? -17 : 17,
+        opacity: 1,
+      }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.52, ease: [0.2, 0.8, 0.2, 1] }}
+    >
+      <img
+        src={neoguriTopStrip}
+        alt=""
+        aria-hidden="true"
+        className={`absolute top-0 h-full w-[186%] select-none object-cover mix-blend-multiply contrast-125 saturate-125 ${isLeft ? "left-0" : "right-0"}`}
+        draggable="false"
+      />
+    </motion.div>
+  );
+}
+
 function TearEffect({ active }) {
   return (
     <AnimatePresence>
       {active && (
-        <div className="pointer-events-none absolute inset-x-[12%] top-[4%] z-30 h-24 overflow-visible">
+        <div className="pointer-events-none absolute inset-x-[11%] top-[2.5%] z-30 h-20 overflow-visible drop-shadow-[0_10px_14px_rgba(0,0,0,0.35)]">
+          <TornStripPiece side="left" />
+          <TornStripPiece side="right" />
           <motion.div
-            className="absolute left-1/2 top-4 h-10 w-[52%] origin-right bg-red-800 shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
-            style={{ clipPath: "polygon(0 0, 100% 0, 88% 100%, 10% 64%)" }}
-            initial={{ x: "-96%", y: 0, rotate: 0, opacity: 0.92 }}
-            animate={{ x: "-117%", y: -18, rotate: -19, opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.48, ease: [0.2, 0.8, 0.2, 1] }}
-          />
-          <motion.div
-            className="absolute left-1/2 top-4 h-10 w-[52%] origin-left bg-yellow-400 shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
-            style={{ clipPath: "polygon(0 0, 100% 0, 92% 66%, 13% 100%)" }}
-            initial={{ x: "-4%", y: 0, rotate: 0, opacity: 0.94 }}
-            animate={{ x: "15%", y: -16, rotate: 18, opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.48, ease: [0.2, 0.8, 0.2, 1] }}
-          />
-          <motion.div
-            className="absolute left-1/2 top-9 h-2 w-[66%] -translate-x-1/2 rounded-full bg-white/90 shadow-[0_0_22px_rgba(255,255,255,0.75)]"
+            className="absolute left-1/2 top-4 h-1.5 w-[74%] -translate-x-1/2 rounded-full bg-white/90 shadow-[0_0_22px_rgba(255,255,255,0.75)]"
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: [0, 1, 0] }}
             transition={{ duration: 0.34, ease: "easeOut" }}
@@ -222,7 +241,7 @@ export default function App() {
               draggable="false"
               animate={
                 isOpened
-                  ? { clipPath: "polygon(0 13%, 45% 13%, 50% 20%, 56% 13%, 100% 13%, 100% 100%, 0 100%)" }
+                  ? { clipPath: "polygon(0 12%, 42% 12%, 50% 18%, 58% 12%, 100% 12%, 100% 100%, 0 100%)" }
                   : { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }
               }
               transition={{ duration: 0.26 }}
