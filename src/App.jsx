@@ -1,7 +1,8 @@
 import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import React from "react";
 import { useMemo, useState } from "react";
-import neoguriPacket from "./assets/neoguri-front.jpg";
+import neoguriOriginalPacket from "./assets/neoguri-original.jpeg";
+import neoguriTornPacket from "./assets/neoguri-front.jpg";
 import neoguriTopStrip from "./assets/neoguri-top-strip.png";
 
 const OPENING_MS = 1480;
@@ -165,6 +166,7 @@ export default function App() {
   const packetControls = useAnimationControls();
 
   const intensity = resultCount === 3 ? "mega" : resultCount === 2 ? "rare" : "plain";
+  const packetImage = isOpening || isOpened ? neoguriTornPacket : neoguriOriginalPacket;
   const resultCopy = useMemo(() => (resultCount ? getResultCopy(resultCount) : ""), [resultCount]);
 
   async function openPacket() {
@@ -235,7 +237,7 @@ export default function App() {
             <span className="absolute -inset-7 -z-10 rounded-full bg-yellow-400/10 blur-3xl transition-opacity group-hover:opacity-100" />
             <TearEffect active={isOpening || isOpened} />
             <motion.img
-              src={neoguriPacket}
+              src={packetImage}
               alt="너구리 라면 봉지"
               className="relative z-10 h-auto w-full select-none drop-shadow-2xl"
               draggable="false"
